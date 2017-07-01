@@ -1,18 +1,30 @@
-document.getElementById("fotografia").onchange = function(e) {
+formData = new FormData();
+
+document.getElementById('arquivo').onchange = function(e) {
 	if(e.target.files != null && e.target.files.length != 0)
 	{
-		var arquivo = e.target.files[0];
-		var formData = new FormData();
-		formData.append("fotografia", arquivo);
+		formData.append("arquivo", e.target.files[0]);
+	}	
+};
 
-		var xmlhttp = new XMLHttpRequest();
-		
-		xmlhttp.onreadystatechange = function() {
-			if(xmlhttp.readyState === 4 && xmlhttp.status === 200)
-				alert(xmlhttp.responseText);
+document.getElementById("btnEnviar").onclick = function() {
+	var tbNome = document.getElementById("tbNome");
+	var nIdade = document.getElementById("nIdade");
+
+	if(tbNome.value != "" && nIdade.value != "")
+	{
+		formData.append('nome', tbNome.value);
+		formData.append('idade', nIdade.value);
+
+		var xmlHttp = new XMLHttpRequest();
+
+		xmlHttp.onreadystatechange = function() {
+			if(xmlHttp.readyState === 4 && xmlHttp.status === 200)
+				alert(xmlHttp.responseText);
 		};
-
-		xmlhttp.open("POST", "recebe.php", true);
-		xmlhttp.send(formData);
+		xmlHttp.open("POST", "recebe.php", true);
+		xmlHttp.send(formData);
 	}
+	else
+		alert("Preencha todos os campos!");
 };

@@ -1,12 +1,16 @@
 <?php 
-	
-	if($_FILES)
+
+	if($_POST)
 	{
-		$arquivo = $_FILES['fotografia'];
-		if(move_uploaded_file($arquivo['tmp_name'], $arquivo['name']))
-			echo "Imagem enviada com sucesso!";
+		$nome = $_POST['nome'];
+		$idade = $_POST['idade'];
+		$fotografia = $_FILES['arquivo'];
+
+		if(move_uploaded_file($fotografia['tmp_name'], $fotografia['name']))
+			echo $nome." ".$idade;
 		else
-			echo "Erro ao enviar a imagem!";
+			echo "Ocorreu um erro.";
+
 	}
 
  ?>
