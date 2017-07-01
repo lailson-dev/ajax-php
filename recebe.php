@@ -1,16 +1,12 @@
 <?php 
 	
-	if(isset($_GET))
+	if($_FILES)
 	{
-		$nomeUsr = $_GET['nome'];
-		$idadeUsr = $_GET['idade'];		
-
-		if($idadeUsr >= 18)
-			echo "O usuário ".$nomeUsr." é maior de idade.";
+		$arquivo = $_FILES['fotografia'];
+		if(move_uploaded_file($arquivo['tmp_name'], $arquivo['name']))
+			echo "Imagem enviada com sucesso!";
 		else
-			echo "O usuário ".$nomeUsr." é menor de idade.";
+			echo "Erro ao enviar a imagem!";
 	}
-	else
-		echo "Oxe";
 
  ?>
